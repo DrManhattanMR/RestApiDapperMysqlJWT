@@ -22,3 +22,7 @@ create table Usuarios
     constraint Usuarios_Roles_id_fk
         foreign key (role) references devnotes.Roles (id)
 );
+
+insert into Roles (descripcion, active) values ('Administrador',true);
+insert into Usuarios ( nombre, apellidos, username, direccion, correo, telefono, password, active, role)
+values ( 'Emanuel', 'Perex Cortes','manucho','agustina ramirez 2013','developermanfred@gmail.com','8482240128','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',true,1);
