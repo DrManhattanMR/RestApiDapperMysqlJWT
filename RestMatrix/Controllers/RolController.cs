@@ -61,15 +61,39 @@ namespace RestMatrix.Controllers
         }
 
         // PUT: api/Rol/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromBody] Rol entidad)
         {
+            try
+            {
+                ServiciosCatalogo srv = new();
+                bool result = srv.EditarRol(entidad);
+                if (!result)
+                    return BadRequest(new { messagge = "Error al editar" });
+                return new OkObjectResult(new { messagge = "Updated" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { resultado = ex.Message });
+            }
         }
 
         // DELETE: api/Rol/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                ServiciosCatalogo srv = new();
+                bool result = srv.DeleteRol(id);
+                if (!result)
+                    return BadRequest(new { messagge = "Error al eliminar" });
+                return new OkObjectResult(new { messagge = "Deleted" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { resultado = ex.Message });
+            }
         }
     }
 }

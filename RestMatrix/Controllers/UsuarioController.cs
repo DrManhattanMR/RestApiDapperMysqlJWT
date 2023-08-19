@@ -77,8 +77,8 @@ namespace RestMatrix.Controllers
         }
 
         // DELETE: api/Usuario/5
-        [HttpDelete]
-        public IActionResult Delete([FromQuery] int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete( int id)
         {
             try
             {

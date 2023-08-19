@@ -17,8 +17,7 @@ public class ServiciosCatalogo
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+           throw new Exception(e.Message);
         }
         finally
         {
@@ -41,8 +40,7 @@ public class ServiciosCatalogo
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+           throw new Exception(e.Message);
         }
         finally
         {
@@ -51,5 +49,49 @@ public class ServiciosCatalogo
             MySqlConnection.ClearPool(conexion);
         }
         return _rowaffected;
+    }
+
+    public bool EditarRol(Rol entidad)
+    {
+        MySqlConnection conexion = ServiciosBD.ObtenerConexion();
+        bool _rowaffected = false;
+        try
+        {
+            var sql = " update Roles set descripcion=@descripcion, active=@active where id=@id ";
+            _rowaffected = conexion.Execute(sql, entidad) > 0;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+        finally
+        {
+            conexion.Close();
+            conexion.Dispose();
+            MySqlConnection.ClearPool(conexion);
+        }
+        return _rowaffected;
+    }
+
+    public bool DeleteRol(int id)
+    {
+        MySqlConnection conexion = ServiciosBD.ObtenerConexion();
+        bool _rowaffected = false;
+        try
+        {
+            var sql = " delete from Roles where id = @id ";
+            _rowaffected = conexion.Execute(sql, new { id = id }) > 0;
+        }
+        catch (Exception e)
+        {
+           throw new Exception(e.Message);
+        }
+        finally
+        {
+            conexion.Close();
+            conexion.Dispose();
+            MySqlConnection.ClearPool(conexion);
+        }
+        return _rowaffected; 
     }
 }

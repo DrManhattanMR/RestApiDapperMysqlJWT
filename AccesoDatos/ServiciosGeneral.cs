@@ -18,4 +18,11 @@ public class ServiciosGeneral
             return output.ToString();
         }
     }
+
+    public string GenerarPasswordDefaul(string nombre, string telefono)
+    {
+        //Retorna un hash256 como password tomando los 3 primeros caracteres del nombre y del telefono
+        var HashToString = PasswordToSha256(nombre.Remove(3) + telefono.Remove(3));
+        return HashToString;
+    }
 }

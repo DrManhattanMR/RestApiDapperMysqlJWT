@@ -64,7 +64,7 @@ public class ServiciosUsuario
         try
         {
             ServiciosGeneral srvgeneral = new();
-            entidad.password = srvgeneral.PasswordToSha256(entidad.password);
+            entidad.password = srvgeneral.GenerarPasswordDefaul(entidad.nombre,entidad.telefono);
             var sql =
                 "insert into Usuarios ( nombre, apellidos, username, direccion, correo, telefono, password, active, role) " +
                 "values (@nombre, @apellidos, @username, @direccion, @correo, @telefono, @password, @active, @role)";
